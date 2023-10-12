@@ -27,10 +27,10 @@ Notice that the `pingall` test work should be down 30s after starting mesh topol
 ### Introduction of topologies
 + Mesh topology
 The mesh topology includes 4 switches (mesh connection) and 8 hosts. Each switch connects to two hosts. Since mesh connection forms loop in the network, we set `stp=True` and `cls=OVSBridge` for switches to utilize the Spanning Tree Protocol to find the shortest route for connection between hosts and make `ping` test successful. 
-![alt text](https://github.com/Zhenhan-Lin/EEL-5718/blob/main/Lab3/figure/Mesh_Topology.png)
+![alt text](https://github.com/Zhenhan-Lin/EEL-5718/blob/main/Lab2/figure/Mesh_Topology.png)
 + Linear topology
 The mesh topology includes 4 switches (linear connection) and 8 hosts. Each switch connects to two hosts.
-![alt text](https://github.com/Zhenhan-Lin/EEL-5718/blob/main/Lab3/figure/Linear_Topology.png)
+![alt text](https://github.com/Zhenhan-Lin/EEL-5718/blob/main/Lab2/figure/Linear_Topology.png)
 + Tree topology
 The mesh topology includes 7 switches (tree connection) and 8 hosts. The switch tree has three layers. The first layer includes root node and the last layer includes 4 leaves of the tree. Each leaf switch connects to two hosts.
-![alt text](https://github.com/Zhenhan-Lin/EEL-5718/blob/main/Lab3/figure/Tree_Topology.png)
+![alt text](https://github.com/Zhenhan-Lin/EEL-5718/blob/main/Lab2/figure/Tree_Topology.png)
