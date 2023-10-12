@@ -63,6 +63,7 @@ plt.savefig("Linear_Topology.png")
 
 # Redraw Tree Topology figure with the corrected structure again
 G_tree = nx.Graph()
+switches.extend(['s5', 's6', 's7'])
 
 # Adding nodes (switches and hosts are already defined)
 G_tree.add_nodes_from(switches)
@@ -71,21 +72,21 @@ G_tree.add_nodes_from(hosts)
 # Adding links between switches for tree topology
 G_tree.add_edge('s1', 's2')
 G_tree.add_edge('s1', 's3')
-G_tree.add_edge('s3', 's4')
+G_tree.add_edge('s2', 's4')
+G_tree.add_edge('s2', 's5')
+G_tree.add_edge('s3', 's6')
+G_tree.add_edge('s3', 's7')
 
 # Connecting hosts to switches
-for i in range(3):
-    G_tree.add_edge(hosts[i], 's2')
-    G_tree.add_edge(hosts[i + 5], 's4')
-
-G_tree.add_edge('s3', 'h4')
-G_tree.add_edge('s3', 'h5')
+for i in range(3, 7):
+    G_tree.add_edge(switches[i], hosts[2*i-6])
+    G_tree.add_edge(switches[i], hosts[2*i-5])
 
 # Drawing the corrected topology
 plt.figure(figsize=(8, 6))
 pos = nx.spring_layout(G_tree)
-nx.draw_networkx_nodes(G_tree, pos, nodelist=switches, node_size=2000, node_color="skyblue", node_shape='s')
-nx.draw_networkx_nodes(G_tree, pos, nodelist=hosts, node_size=2000, node_color="lightgreen", node_shape='o')
+nx.draw_networkx_nodes(G_tree, pos, nodelist=switches, node_size=1300, node_color="skyblue", node_shape='s')
+nx.draw_networkx_nodes(G_tree, pos, nodelist=hosts, node_size=1300, node_color="lightgreen", node_shape='o')
 nx.draw_networkx_edges(G_tree, pos)
 nx.draw_networkx_labels(G_tree, pos)
 plt.title("Tree Topology", fontsize=16, fontweight='bold', fontstyle='italic', color='darkred', y=1.02)
