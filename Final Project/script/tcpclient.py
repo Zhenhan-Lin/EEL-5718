@@ -6,9 +6,9 @@ import csv
 def send_tcp_packets(destination_ip, destination_port, interval_sec, num_packets, packet_size):
     startTime = time.time()
     tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #tcp_socket.connect((destination_ip, destination_port))
     tcp_socket.settimeout(10)  # Set socket timeout to 10 second
 
+    # Calculation Variables
     sent_packets = 0
     received_packets = 0
     rtt_sum = 0
@@ -36,14 +36,11 @@ def send_tcp_packets(destination_ip, destination_port, interval_sec, num_packets
             end_time = time.time()
             rtt = end_time - start_time
             rtt_sum += rtt
-            response_text = response.decode().strip()
-            # print(f"{rtt:.6f}")
-            #print(f"Received response: {response_text}, RTT: {rtt:.6f}s")
-            #print(f"Received response: {response.decode()}, RTT: {rtt:.6f}s")
         except socket.timeout:
-            lost_data += len(data) 
-            # print("None")
-            #print(f"No response received for packet {i} within 1 second")
+            lost_data += len(data)
+            print(f"No response received for packet {i}")
+        except Exception as e:
+            print(f"No response received for packet {i}")
 
         time.sleep(interval_sec)
 
@@ -68,8 +65,6 @@ parser = argparse.ArgumentParser(description='Send SCTP packets to a specified I
 parser.add_argument('destination_ip', default='10.0.0.1', type=str, help='Destination IP address')
 parser.add_argument('destination_port', default='5201', type=int, help='Destination port number')
 parser.add_argument('topology_name', default='tree', type=str, help='Number of used topology')
-# parser.add_argument('exp_time', default='5', type=int, help='Run times')
-# parser.add_argument('num_packets', default='500', type=int, help='Number of packets to send')
 
 
 # 解析命令行参数
